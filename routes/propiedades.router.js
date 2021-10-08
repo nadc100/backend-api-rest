@@ -1,4 +1,4 @@
-import {Router} from 'express-router';
+import { Router } from 'express-router';
 const router = Router();
 
 import * as propiedadController from '../controllers/propiedades.controller'
@@ -14,5 +14,4 @@ router.put('/',propiedadController.updatePropiedadById)
 router.delete('/',propiedadController.deletePropiedadById)
 
 
-export default router;
-
+export default propiedadesRoutes;

@@ -1,5 +1,5 @@
 const db = require('./db');
-const Propiedad = require('./models/propiedad.model');
+const Propiedad = require('./models/propiedades.model');
 
 export const createPropiedad = async (req, res) => {
     const { tipo, estrato, estado, precio, disponible } = req.body

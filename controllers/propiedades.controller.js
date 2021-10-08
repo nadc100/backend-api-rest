@@ -28,7 +28,4 @@ export const deletePropiedadById = async (req, res) => {
     await propiedad.findByIdAndDelete(propiedadid);
 }
 
-
-
-
 export default propiedadController;

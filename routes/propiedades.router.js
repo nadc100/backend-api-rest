@@ -1,17 +1,17 @@
 import { Router } from 'express-router';
 const router = Router();
 
-import * as propiedadController from '../controllers/propiedades.controller'
+import * as controladorPropiedades from '../controllers/propiedades.controller'
 
-router.post('/',propiedadController.createPropiedad)
+router.post('/',controladorPropiedades.createPropiedad)
 
-router.get('/',propiedadController.getPropiedad)
+router.get('/',controladorPropiedades.getPropiedad)
 
-router.get('/',propiedadController.getPropiedadById)
+router.get('/',controladorPropiedades.getPropiedadById)
 
-router.put('/',propiedadController.updatePropiedadById)
+router.put('/',controladorPropiedades.updatePropiedadById)
 
-router.delete('/',propiedadController.deletePropiedadById)
+router.delete('/',controladorPropiedades.deletePropiedadById)
 
 
 export default propiedadesRoutes;

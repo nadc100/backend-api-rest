@@ -1,7 +1,7 @@
-let mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const mongoose = require('mongoose');
 
-let propiedadSchema = Schema({
+let propiedadSchema = mongoose.Schema({
+  _id: mongoose.Types.ObjectId,
   tipo: String,
   estrato: Number,
   estado: String,
@@ -9,4 +9,4 @@ let propiedadSchema = Schema({
   disponible: Boolean
 });
 
-let propiedad  = mongoose.model('propiedad', propiedadSchema);
+module.exports = mongoose.model( "Propiedad", propiedadSchema, "collection" )

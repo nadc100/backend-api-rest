@@ -1,5 +1,5 @@
-import Propiedad from '../models/Propiedades';
-let mongoose = require('mongoose');
+const mongoose = require('mongoose');
+let Propiedad = require('./models/propiedad.model');
 
 export const createPropiedad = async (req, res) => {
     const { tipo, estrato, estado, precio, disponible } = req.body
@@ -25,7 +25,7 @@ export const updatePropiedadById = async (req, res) => {
 
 export const deletePropiedadById = async (req, res) => {
     const { propiedadid } = req.params;
-    await propiedad.findByIdAndDelete(propiedadid);
+    await Propiedad.findByIdAndDelete(propiedadid);
 }
 
-export default propiedadController;
+module.exports = controladorPropiedades;

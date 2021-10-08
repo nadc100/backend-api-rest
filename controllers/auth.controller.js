@@ -9,4 +9,7 @@ export const login = async ()=>{
     res.json('login')
 }
 
-
+export default{
+    login,
+    registro
+}

@@ -4,7 +4,7 @@
   "description": "an API to be used by Mobiliaria-IN",
   "main": "app.js",
   "scripts": {
-    "dev": "node app.js"
+    "dev": "nodemon app"
   },
   "repository": {
     "type": "git",

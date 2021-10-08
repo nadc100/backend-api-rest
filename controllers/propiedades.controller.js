@@ -20,11 +20,12 @@ export const getPropiedadById = async (req, res) => {
 
 export const updatePropiedadById = async (req, res) => {
     const propiedadActualizada = await Propiedad.findByIdAndUpdate(req.params.productId,req.body,{new:true});
-
+    res.status(200).json(propiedadActualizada);
 }
 
 export const deletePropiedadById = async (req, res) => {
-
+    const { propiedadid } = req.params;
+    await propiedad.findByIdAndDelete(propiedadid);
 }
 
 

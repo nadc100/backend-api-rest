@@ -5,7 +5,8 @@ const cors = require("cors");
 const propiedadesRoutes = require('../routes/propiedades.router');
 const morgan = require('morgan');
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5000}
+const corsOptions = { origin: "http://localhost:3000" };
 
 dotenv.config({ path: './config.env' });
 
@@ -19,7 +20,6 @@ app.use(express.json());
 
 app.use('/propiedades', propiedadesRoutes);
 
-let corsOptions = { origin: "http://localhost:3000" };
 
 app.use(cors(corsOptions));
 

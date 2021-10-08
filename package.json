@@ -2,11 +2,10 @@
   "name": "backend-api-rest",
   "version": "1.0.0",
   "description": "an API to be used by Mobiliaria-IN",
-  "main": "src/index.js",
+  "main": "server.js",
   "scripts": {
-    "build": "babel src --out-dir build",
-    "start": "node src/index.js",
-    "dev": "nodemon --exec babel-node src/index.js"
+    "start": "node server",
+    "dev": "nodemon server"
   },
   "repository": {
     "type": "git",

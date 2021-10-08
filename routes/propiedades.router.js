@@ -1,5 +1,5 @@
-import { Router } from 'express-router';
-const router = Router();
+let express = require('express')
+let router = express.Router()
 
 import * as controladorPropiedades from '../controllers/propiedades.controller'
 
@@ -13,5 +13,4 @@ router.put('/',controladorPropiedades.updatePropiedadById)
 
 router.delete('/',controladorPropiedades.deletePropiedadById)
 
-
-export default propiedadesRoutes;
+module.export = router;

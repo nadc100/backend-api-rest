@@ -1,25 +1,31 @@
-const express = require('express');
-const path = require('path');
-const app = express();
-const morgan= require('morgan');
-const port = 3000;
-const cors = require('cors');
-const conexion = require('../db')
+const express=require('express');
+const app=express();
+const cors = require("cors");
+const propiedadesRoutes = require('../routes/propiedades.router');
+const database = require('../db')
+const morgan = require('morgan');
 
 app.use(morgan('dev'));
-app.use(express.json());
-app.use(db)
-app.set('views', path.join(__dirname, 'views'));
+   
+app.use(express.urlencoded({extended: true})); 
 
+app.use(express.json()); 
 
-async function listDatabases(conexion){
-    databasesList = await conexion.db().admin().listDatabases();
- 
-    console.log("Databases:");
-    databasesList.databases.forEach(db => console.log(` - ${db.name}`));
+app.use('/propiedades', propiedadesRoutes);
+
+let corsOptions = {
+  origin: "http://localhost:3000"
 };
 
+app.use(cors(corsOptions));
 
-app.listen(port, () => {
-    console.log(`Example app listening on port ${port}!`)
-  });
+app.use(express.json());
+
+app.use(express.urlencoded({ extended: true }));
+
+app.get('/propiedades',propiedadesRoutes)
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}.`);
+});

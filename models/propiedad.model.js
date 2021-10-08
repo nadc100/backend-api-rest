@@ -1,12 +1,21 @@
-const mongoose = require('mongoose');
+module.exports = mongoose => {
+  let schema = mongoose.Schema(
+    {
+      tipo: String,
+      estrato: Number,
+      estado: String,
+      precio: Number, 
+      disponible: Boolean
+    },
+    { timestamps: true }
+  );
 
-let propiedadSchema = mongoose.Schema({
-  _id: mongoose.Types.ObjectId,
-  tipo: String,
-  estrato: Number,
-  estado: String,
-  precio: Number,
-  disponible: Boolean
-});
+  schema.method("toJSON", function () {
+    const { __v, _id, ...object } = this.toObject();
+    object.id = _id;
+    return object;
+  });
 
-module.exports = mongoose.model( "Propiedad", propiedadSchema, "collection" )
+  const Propiedad = mongoose.model("propiedad", schema);
+  return Propiedad;
+};

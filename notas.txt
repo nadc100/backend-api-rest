@@ -1,0 +1,5 @@
+- hacer un CRUD
+- una interface sencilla para recibir donaciones
+- se entra a un landing se escribe que se quiere donar y en donde se debe recoger y ya
+- el formaulario de donación debe ser simple
+- lo recogido se debe marcar con códigos de barras o QR para hacerles un segumineto de a donde van a parar

@@ -1,5 +1,5 @@
 const db = require('./db');
-const Propiedad = require('./models/propiedades.model');
+const Propiedad = require('./models/mpropiedades');
 
 export const createPropiedad = async (req, res) => {
     const { tipo, estrato, estado, precio, disponible } = req.body
@@ -28,4 +28,4 @@ export const deletePropiedadById = async (req, res) => {
     await db.Propiedad.findByIdAndDelete(propiedadid);
 }
 
-module.exports = controladorPropiedades;
+module.exports = cpropiedades;

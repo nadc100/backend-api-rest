@@ -1,12 +1,9 @@
 const express = require("express")
-const db = require('./db')
-const user= require("./models/user")
 const router = express.Router()
+const controladorUsuarios = require('./controllers/user.controller')
+const Usuario = require('./models/user')
 
 // Get all posts
-router.get("/user", async (req, res) => {
-	const usuario = await db.user.find()
-	res.send(usuario)
-})
+router.get('/usuarios', controladorUsuarios.getUsuario)
 
-module.exports = router
+module.exports = router;

@@ -1,7 +1,9 @@
 let express = require('express')
 let router = express.Router()
 
-import controladorPropiedades from './controllers/propiedades.controller'
+const Propiedad = require('../models/propiedades.routes')
+
+const controladorPropiedades = require('./controllers/propiedades.controller')
 
 router.post('/',controladorPropiedades.createPropiedad)
 

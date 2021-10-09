@@ -1,9 +1,9 @@
 const db = require('./db');
 const Usuario = require('./models/user');
 
-export const createUsuario = async (req, res) => {
+export let createUsuario = async (req, res) => {
     const { nombre,password,correo } = req.body
-    const nuevoUsuario = Usuario(nombre,password,correo)
+    const Usuario = Usuario(nombre,password,correo)
     const UsuarioGuardada = await db.nuevoUsuario.save()
     res.status(201).json(UsuarioGuardada)
 }

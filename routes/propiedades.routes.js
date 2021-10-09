@@ -1,7 +1,7 @@
 let express = require('express')
 let router = express.Router()
 
-const Propiedad = require('../models/propiedades.routes')
+const Propiedad = require('./models/propiedades.model')
 
 const controladorPropiedades = require('./controllers/propiedades.controller')
 

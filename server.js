@@ -32,8 +32,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 // Routes
 app.use('/api/propiedades', require('./routes/propiedades.routes'))
-app.use('/user', require('./routes/user.routes'))
-app.use('/login', require('./routes/auth.routes'))
+
 
 const PORT = process.env.PORT || 3000
 

@@ -1,19 +1,13 @@
-import User from './models/user';
+const db = require('./db');
+const Rol = require('./models/mrole');
 
 export const registro = async (req, res) => {
-    const {username,email,password} = req.body;
+    const {rol} = req.body;
 
-    const nuevoUsuario = new User({
-        username,
-        email,
-        password: await User.encryptPassword(password)
+    const nuevoRol = new User({
+        rol
     });
-    const usuarioSalvado = await nuevoUsuario.save();
-    const token = jwt.sing({id:usuarioSalvado},config.SECRET,{
-        expiresIn: 3600
-    })
+    const rolSalvado = await db.nuevoRol.save();
 };
 
-export default{
-    login
-};
+module.exports = registro;

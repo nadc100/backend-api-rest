@@ -1,5 +1,5 @@
 const db = require('./db');
-const Usuario = require('./models/user');
+const Usuario = require('./models/muser');
 
 export let createUsuario = async (req, res) => {
     const { nombre,password,correo } = req.body

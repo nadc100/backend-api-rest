@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
 const propiedadSchema = new Schema({
+  id:Number,
   tipo: String,
   estrato: Number,
   estado: String,

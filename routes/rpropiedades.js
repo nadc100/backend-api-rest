@@ -1,16 +1,18 @@
 const { Router } = require('express');
 const router = Router();
 
-const cpropiedades = require('./controllers/cpropiedades');
+const cpropiedades = require('../controllers/cpropiedades');
 
-router.post('/', cpropiedades.createPropiedad)
+router.get('/:id', cpropiedades.findByID);
 
-router.get('/', cpropiedades.getPropiedad)
+// router.post('/', cpropiedades.createPropiedad);
 
-router.get('/', cpropiedades.getPropiedadById)
+// router.get('/', cpropiedades.getPropiedad);
 
-router.put('/', cpropiedades.updatePropiedadById)
+// router.get('/', cpropiedades.getPropiedadById);
 
-router.delete('/', cpropiedades.deletePropiedadById)
+// router.put('/', cpropiedades.updatePropiedadById);
+
+// router.delete('/', cpropiedades.deletePropiedadById);
 
 module.exports = router;

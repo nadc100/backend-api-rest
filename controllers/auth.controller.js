@@ -15,6 +15,5 @@ export const registro = async (req, res) => {
 };
 
 export default{
-    login,
-    registro
+    login
 };

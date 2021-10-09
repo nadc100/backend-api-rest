@@ -1,9 +1,8 @@
 import { Router } from 'express-router';
 const router = Router();
 
-const authControl = require('./controllers/auth.controlles');
+const authControl = require('./controllers/auth.controller');
 
-router.post('/registro', registro)
-router.post('/login', login)
+router.post('/login', authControl.login)
 
 export default router;

@@ -1,18 +1,18 @@
 const { Router } = require('express');
 const router = Router();
+const mongoose = require('mongoose');
 
-const cpropiedades = require('../controllers/cpropiedades');
 
-router.get('/:id', cpropiedades.findByID);
+router.get('/:id', async (req, res) => {
+    try{
+       const Propiedad= await Propiedad.findById(req.params.id).exec();
+       console.log(Propiedad)
+       res.send(Propiedad);
+    }catch(err){
+       return res.status(500).send({
+        message: err.message
+      });
+    }} );
 
-// router.post('/', cpropiedades.createPropiedad);
-
-// router.get('/', cpropiedades.getPropiedad);
-
-// router.get('/', cpropiedades.getPropiedadById);
-
-// router.put('/', cpropiedades.updatePropiedadById);
-
-// router.delete('/', cpropiedades.deletePropiedadById);
 
 module.exports = router;

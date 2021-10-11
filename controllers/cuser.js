@@ -1,8 +1,8 @@
 const Usuario = require('./models/muser');
 
 export let createUsuario = async (req, res) => {
-    const { nombre,password,correo } = req.body
-    const Usuario = Usuario(nombre,password,correo)
+    const { nombre, password, correo } = req.body
+    const Usuario = Usuario(nombre, password, correo)
     const UsuarioGuardada = await nuevoUsuario.save()
     res.status(201).json(UsuarioGuardada)
 }
@@ -18,7 +18,7 @@ export const getUsuarioById = async (req, res) => {
 }
 
 export const updateUsuarioById = async (req, res) => {
-    const usuarioActualizado = await Usuario.findByIdAndUpdate(req.params.productId,req.body,{new:true});
+    const usuarioActualizado = await Usuario.findByIdAndUpdate(req.params.productId, req.body, { new: true });
     res.status(200).json(usuarioActualizado);
 }
 

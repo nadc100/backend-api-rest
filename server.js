@@ -4,7 +4,7 @@ const morgan = require('morgan');
 const cors = require('cors');
 
 const path = require('path');
-const rutaspropiedades = require('./routes/rpropiedades');
+const rutaspropiedades = require('./routes/proprutas');
 const app = express();
 
 require('dotenv').config();
@@ -18,11 +18,19 @@ app.use(express.json());
 
 app.use(express.urlencoded({ extended: true }));
 
-app.use('/propiedades', rutaspropiedades);
+app.use(express.static(path.join(__dirname, 'public')));
 
+mongoose.connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindandModify: true,
+    useCreateIndex: true
+}).then(() => console.log('conectado a la base de datos')).catch((err => {
+    console.log(err);
+}))
 
+app.use('/api/propiedades', rutaspropiedades);
 
-//middleware
 app.listen(port, () => {
     console.log(`Server started on port: ${app.get('PORT')}`);
 });

@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-//const { Schema } = mongoose;
 
 const propiedadSchema = new mongoose.Schema({
   id:Number,
@@ -12,6 +11,4 @@ const propiedadSchema = new mongoose.Schema({
   { timestamps: true }
 );
 
-const Propiedad = mongoose.model('Propiedad', propiedadSchema);
-
-module.export = Propiedad;
+module.export = mongoose.model('Propiedad', propiedadSchema);

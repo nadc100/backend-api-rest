@@ -1,31 +1,63 @@
+const express = require('express');
+const router = express.Router();
 const Propiedad = require('../models/propmodel');
-const mongoose = require('mongoose');
+const app = express();
 
-module.exports = class API {
-   static async crearPropiedad(req, res) {
-      const nuevaPropiedad = new Propiedad(re.body);
-      const propiedadGravada = await nuevaPropiedad.save();
-      res.json(propiedadGravada);
-   };
 
-   static async listarPropiedades(req, res) {
-      res.send("listar")
-   };
+async function listarPropiedades(req, res) {
+   Propiedad.find({}).then(propiedades => {
+         if (propiedades.length) return res.status(200).send({ propiedades })
+         return res.status(204).send({ message: 'NO CONTENT' });
+      }).catch(err => res.status(500).send({ err }))
+}
 
-   static async listarPropiedadesPorId(req, res) {
-      try {
-         const propiedades = await Propiedad.find();
-         res.status(200).json(propiedades)
-      } catch (error) {
-         res.status(404).json({message:err.message});
+function crearPropiedad(req, res) {
+   let propiedad = new Propiedad(req.body);
+   propiedad.save().then(propiedad => res.status(201).send({ propiedad })).catch(err => res.status(500).send({ err }))
+}
+
+function show(req, res) {
+   if (req.body.error) return res.status(500).send({ error });
+   if (!req.body.propiedades) return res.status(404).send({ message: 'Not Found' });
+   let propiedades = req.body.propiedades;
+   return res.status(200).send({ propiedades });
+}
+
+function actualizarPropiedad(req, res) {
+   if (req.body.error) return res.status(500).send({ error });
+   if (!req.body.propiedades) return res.status(404).send({ message: 'Not Found' });
+   let product = req.body.propiedades[0];
+   product = Object.assign(product, req.body);
+   product.save()
+      .then(product => res.status(200).send({ message: 'Product Updated', product })
+      ).catch(err => res.status(500).send({ err }))
+}
+
+function borrarPropiedad(req, res) {
+   if (req.body.error) return res.status(500).send({ error });
+   if (!req.body.propiedades) return res.status(404).send({ message: 'Not Found' });
+   req.body.propiedades[0].remove()
+      .then(product => {
+         res.status(200).send({ message: 'Ppropiedad Borrada', product })
       }
-   };
+      ).catch(err => res.status(500).send({ err }));
+}
 
-   static async actualizarPropiedad(req, res) {
-      res.send("actualizar")
-   };
+function listarPropiedadesPorId(req, res, next) {
+   let query = {};
+   Propiedad.find(req.params.id).then(propiedades => {
+      if (!propiedades.length) return next();req.body.propiedades = propiedades;
+      return next();
+   }).catch(err => {
+      req.body.error = err;
+      next();
+   })
+}
 
-   static async borrarPropiedad(req, res) {
-      res.send("borrar")
-   };
+module.exports = {
+   listarPropiedades,
+   crearPropiedad,
+   actualizarPropiedad,
+   borrarPropiedad,
+   listarPropiedadesPorId,
 }

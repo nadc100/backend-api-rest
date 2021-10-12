@@ -24,7 +24,7 @@ async function crearPropiedad(req, res) {
    }))
 }
 
-async function actualizarPropiedad(req, res) {
+function actualizarPropiedad(req, res) {
    if (req.body.error) return res.status(500).send({
       error
    });
@@ -47,10 +47,10 @@ function borrarPropiedad(req, res) {
       error
    });
    if (!req.body.propiedades) return res.status(404).send({
-      message: 'Not Found'
+      message: 'Propiedad no encontrada'
    });
-   req.body.propiedades[0].remove()
-      .then(propiedades => {
+   req.body.propiedad[0].remove()
+      .then(propiedad => {
          res.status(200).send({
             message: 'Propiedad Borrada',
             propiedad

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const API = require('./controllers/cpropiedadess');
+const API = require('../controllers/cpropiedades');
 
 router.get('/',API.listarPropiedades);
 router.get('/:id',API.listarPropiedadesPorId);

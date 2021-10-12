@@ -1,7 +1,7 @@
-import mongoose from 'mongoose';
-const { Schema } = mongoose;
+const mongoose = require('mongoose');
+//const { Schema } = mongoose;
 
-const propiedadSchema = new Schema({
+const propiedadSchema = new mongoose.Schema({
   id:Number,
   tipo: String,
   estrato: Number,

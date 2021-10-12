@@ -16,5 +16,4 @@ module.exports = class API {
    static async borrarPropiedad(req, res) {
       res.send("borrar")
    }
-
 }

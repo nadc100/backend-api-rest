@@ -2,7 +2,8 @@ const express = require('express');
 const Propiedad = require('../models/propmodel');
 
 async function listarPropiedades(req, res) {
-   await Propiedad.find({}).then(propiedades => {
+   const propiedades = await Propiedad.find()
+   .then((propiedades)=>{
       if (propiedades.length) return res.status(200).send({
          propiedades
       })
@@ -14,8 +15,8 @@ async function listarPropiedades(req, res) {
    }))
 }
 
-function crearPropiedad(req, res) {
-   let propiedad = new Propiedad(req.body);
+async function crearPropiedad(req, res) {
+   let propiedad = await Propiedad(req.body);
    propiedad.save().then(propiedad => res.status(201).send({
       propiedad
    })).catch(err => res.status(500).send({
@@ -23,31 +24,18 @@ function crearPropiedad(req, res) {
    }))
 }
 
-function show(req, res) {
+async function actualizarPropiedad(req, res) {
    if (req.body.error) return res.status(500).send({
       error
    });
    if (!req.body.propiedades) return res.status(404).send({
       message: 'Not Found'
    });
-   let propiedades = req.body.propiedades;
-   return res.status(200).send({
-      propiedades
-   });
-}
-
-function actualizarPropiedad(req, res) {
-   if (req.body.error) return res.status(500).send({
-      error
-   });
-   if (!req.body.propiedades) return res.status(404).send({
-      message: 'Not Found'
-   });
-   let product = req.body.propiedades[0];
+   let propiedad = req.body.propiedades[0];
    propiedad = Object.assign(propiedad, req.body);
    propiedad.save()
       .then(product => res.status(200).send({
-         message: 'Product Updated',
+         message: 'Propiedad actualizada',
          product
       })).catch(err => res.status(500).send({
          err
@@ -62,10 +50,10 @@ function borrarPropiedad(req, res) {
       message: 'Not Found'
    });
    req.body.propiedades[0].remove()
-      .then(product => {
+      .then(propiedades => {
          res.status(200).send({
-            message: 'Ppropiedad Borrada',
-            product
+            message: 'Propiedad Borrada',
+            propiedad
          })
       }).catch(err => res.status(500).send({
          err

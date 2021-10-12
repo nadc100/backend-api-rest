@@ -4,7 +4,7 @@ const morgan = require('morgan');
 const cors = require('cors');
 
 const path = require('path');
-const rutaspropiedades = require('./routes/proprutas');
+const rutaspropiedades = require('../routes/proprutas');
 const app = express();
 
 require('dotenv').config();
@@ -25,16 +25,13 @@ mongoose.connect(process.env.MONGO_URI, {
     useUnifiedTopology: true,
     useFindandModify: true,
     useCreateIndex: true
-}).then(() => console.log('conectado a la base de datos')).catch((err => {
+}).then(() => console.log(`MongoDB Connected: ${conn.connection.host}`).catch((err) => {
     console.log(err);
-}))
+}));
 
 app.use('/api/propiedades', rutaspropiedades);
 
 app.listen(port, () => {
-    console.log(`Server started on port: ${app.get('PORT')}`);
+    console.log(`Server started on port: ${PORT}`);
 });
 
-app.get('/', (req, res) => {
-    res.send('index');
-})

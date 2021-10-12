@@ -4,6 +4,8 @@ dist
 # local env files
 .env.local
 .env.*.local
+.env
+*.env
 
 # Log files
 npm-debug.log*
@@ -13,5 +15,3 @@ yarn-error.log*
 # Editor directories and files
 .vscode
 db.js
-.env
-*.env

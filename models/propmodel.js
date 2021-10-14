@@ -11,4 +11,4 @@ const propiedadSchema = new mongoose.Schema({
   { timestamps: true }
 );
 
-module.export = mongoose.model('Propiedad', propiedadSchema, propiedades);
+module.exports = mongoose.model('Propiedad', propiedadSchema, 'propiedades');

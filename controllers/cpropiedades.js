@@ -1,27 +1,27 @@
-const express = require('express');
-const Propiedad = require('../models/propmodel');
+const Propiedad = require("../models/propmodel");
 
 async function listarPropiedades(req, res) {
-   const propiedades = await Propiedad.find()
-   .then((propiedades)=>{
-      if (propiedades.length) return res.status(200).send({
-         propiedades
-      })
-      return res.status(204).send({
-         message: 'NO CONTENT'
-      });
-   }).catch(err => res.status(500).send({
-      err
-   }))
+   try {
+      const propiedades = await Propiedad.find();
+      if (propiedades.length) {
+         res.status(200).send(propiedades)
+      } else {
+         res.status(204).send({ message: 'NO CONTENT' });
+      }
+   } catch (err) {
+      res.status(500).send(err);
+   }
 }
 
+cesardiaz-utp
+
 async function crearPropiedad(req, res) {
-   let propiedad = await Propiedad(req.body);
-   propiedad.save().then(propiedad => res.status(201).send({
-      propiedad
-   })).catch(err => res.status(500).send({
-      err
-   }))
+   try {
+      let propiedad = await Propiedad.create(req.body);
+      res.status(201).json(propiedad);
+   } catch (err) {
+      res.status(500).send(err)
+   }
 }
 
 function actualizarPropiedad(req, res) {

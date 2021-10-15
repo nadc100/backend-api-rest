@@ -4,7 +4,7 @@ const morgan = require('morgan');
 const cors = require('cors');
 const path = require('path');
 const router = require('./routes/proprutas');
-const database = require('./db');
+const db = require('./db');
 require('dotenv').config();
 
 const app = express();
@@ -19,7 +19,7 @@ app.use(express.urlencoded({ extended: true }))
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-database.connect();
+db.connect();
 
 app.use('/api/propiedades', router);
 

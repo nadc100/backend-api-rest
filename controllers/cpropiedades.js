@@ -1,81 +1,68 @@
-const express = require('express');
-const Propiedad = require('../models/propmodel');
+const Propiedad = require("../models/propmodel");
 
-async function listarPropiedades(req, res) {
-   const propiedades = await Propiedad.find()
-   .then((propiedades)=>{
-      if (propiedades.length) return res.status(200).send({
-         propiedades
-      })
-      return res.status(204).send({
-         message: 'NO CONTENT'
-      });
-   }).catch(err => res.status(500).send({
-      err
-   }))
-}
+module.exports = class API {
+   static async listarPropiedades(req, res) {
+      try {
+         const propiedades = await Propiedad.find();
+         res.status(200).json(propiedades);
+      } catch (err) {
+         res.status(404).json({ message: err.message });
+      }
+   }
 
-async function crearPropiedad(req, res) {
-   let propiedad = await Propiedad(req.body);
-   propiedad.save().then(propiedad => res.status(201).send({
-      propiedad
-   })).catch(err => res.status(500).send({
-      err
-   }))
-}
+   static async listarPropiedadesPorId(req, res) {
+      try {
+         const Id = req.params.code;
+         const propiedad = await Propiedad.findOne({ "Id": Id });
+         if (propiedad == null) {
+            res.status(404).json({ message: "Propiedad no encontrada" });
+         } else {
+            res.status(200).json(propiedad);
+         }
+      } catch (err) {
+         res.status(400).json({ message: err.message });
+      }
+   }
 
-function actualizarPropiedad(req, res) {
-   if (req.body.error) return res.status(500).send({
-      error
-   });
-   if (!req.body.propiedades) return res.status(404).send({
-      message: 'Not Found'
-   });
-   let propiedad = req.body.propiedades[0];
-   propiedad = Object.assign(propiedad, req.body);
-   propiedad.save()
-      .then(product => res.status(200).send({
-         message: 'Propiedad actualizada',
-         product
-      })).catch(err => res.status(500).send({
-         err
-      }))
-}
+   static async crearPropiedad(req, res) {
+      try {
+         let propiedad = await Propiedad.create(req.body);
+         res.status(201).json(propiedad);
+      } catch (err) {
+         res.status(500).json({ message: err.message });
+      }
+   }
 
-function borrarPropiedad(req, res) {
-   if (req.body.error) return res.status(500).send({
-      error
-   });
-   if (!req.body.propiedades) return res.status(404).send({
-      message: 'Propiedad no encontrada'
-   });
-   req.body.propiedad[0].remove()
-      .then(propiedad => {
-         res.status(200).send({
-            message: 'Propiedad Borrada',
-            propiedad
-         })
-      }).catch(err => res.status(500).send({
-         err
-      }));
-}
+   static async actualizarPropiedad(req, res) {
+      try {
+         const Id = req.params.id;
+         const propiedad = req.body;
+         await Propiedad.updateOne({ _id: Id }, propiedad);
+         res.status(200).json()
+      } catch (err) {
+         res.status(400).json({ message: err.message })
+      }
+   }
 
-function listarPropiedadesPorId(req, res, next) {
-   let query = {};
-   Propiedad.find(req.params.id).then(propiedades => {
-      if (!propiedades.length) return next();
-      req.body.propiedades = propiedades;
-      return next();
-   }).catch(err => {
-      req.body.error = err;
-      next();
-   })
-}
+   static async borrarPropiedad(req, res) {
+      try {
+         const Id = req.params.id;
+         await Propiedad.deleteOne({ _id: Id });
+         res.status(200).json();
+      } catch (err) {
+         res.status(400).json({ message: err.message });
+      }
+   }
 
-module.exports = {
-   listarPropiedades,
-   crearPropiedad,
-   actualizarPropiedad,
-   borrarPropiedad,
-   listarPropiedadesPorId,
+   static async cambiarImagen(req, res) {
+      try {
+         const Id = req.params.id;
+         const imageName = req.file.filename;
+         await Propiedad.updateOne({ "code": Id }, { "imageUrl": "/" + imageName });
+         res.status(200).json();
+      } catch (err) {
+         res.status(400).json({ message: err.message });
+      }
+   }
+
 }
